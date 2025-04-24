@@ -37,36 +37,43 @@ void HeapNode::push(int x)
     }
 }
 
-int HeapNode::pop() {
+int HeapNode::pop() 
+{
     int result = val;
 
-    // If it's a leaf node
-    if (!left && !right) {
+    if (left == nullptr && right == nullptr) 
+    {
         size = 0;
         return result;
     }
 
-    // Pick the heavier subtree to find the last node
-    if (left && (!right || left->size >= right->size)) {
+    if (left && (right == nullptr || left->size >= right->size)) 
+    {
         val = left->pop();
-        if (left->size == 0) {
+
+        if (left->size == 0) 
+        {
             delete left;
             left = nullptr;
         }
-    } else {
+    } 
+    
+    else 
+    {
         val = right->pop();
-        if (right->size == 0) {
+
+        if (right->size == 0) 
+        {
             delete right;
             right = nullptr;
         }
     }
 
-    size--;
+    size = size - 1;
+
     heapify();
     return result;
 }
-
-
 
 
 void HeapNode::heapify()
