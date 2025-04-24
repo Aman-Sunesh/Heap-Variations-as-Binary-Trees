@@ -99,11 +99,11 @@ void HeapNode::heapify()
     }
 }
 
-int HeapNode::max_value()
+int HeapNode::maxVal() 
 {
     int max_value = val;
 
-    for (auto it = begin(); it ! = end(); ++it)
+    for (auto it = begin(); it != end(); ++it)
     {
         HeapNode& node = *it;
 

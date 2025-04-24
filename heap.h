@@ -1,6 +1,8 @@
 #include <string>
 #include <stack>
 
+using namespace std;
+
 class HeapNode
 {
         int val;
@@ -27,7 +29,7 @@ class HeapNode
         // helper function
         void heapify();
 
-        int max_value();
+        int maxVal();
 
         class HeapIterator
         {
