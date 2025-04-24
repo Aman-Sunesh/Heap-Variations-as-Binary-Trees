@@ -1,4 +1,5 @@
 #include <string>
+#include <stack>
 
 class HeapNode
 {
@@ -25,7 +26,69 @@ class HeapNode
 
         // helper function
         void heapify();
-};
+
+        int max_value();
+
+        class HeapIterator
+        {
+            private:
+                stack<HeapNode*> s;
+
+            public:
+                HeapIterator(HeapNode* root)
+                {
+                    while (root != nullptr)
+                    {
+                        s.push(root);
+                        root = root->left;
+                    }
+                }
+
+                HeapIterator& operator ++()
+                {
+                    HeapNode* current = s.top();
+                    s.pop();
+
+                    current = current->right;
+
+                    while (current != nullptr) 
+                    {
+                        s.push(current);
+                        current = current->left;
+                    }
+
+                    return *this;
+                }
+
+                bool operator !=(const HeapIterator& other)
+                {
+                    if (this->s != other.s)
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                HeapNode& operator *()
+                {
+                    return *s.top();
+                }
+        };
+
+        HeapIterator begin()
+        {
+            return HeapIterator(this);
+        }
+
+        HeapIterator end()
+        {
+            return HeapIterator(nullptr);
+        }
+    };
 
 inline std::string HeapNode::edges() const
 {

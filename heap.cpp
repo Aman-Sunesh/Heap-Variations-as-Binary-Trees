@@ -72,6 +72,7 @@ int HeapNode::pop()
     size = size - 1;
 
     heapify();
+
     return result;
 }
 
@@ -96,4 +97,21 @@ void HeapNode::heapify()
         swap(min->val, val);
         min->heapify();
     }
+}
+
+int HeapNode::max_value()
+{
+    int max_value = val;
+
+    for (auto it = begin(); it ! = end(); ++it)
+    {
+        HeapNode& node = *it;
+
+        if (node.val > max_value)
+        {
+            max_value = node.val;
+        }
+    }
+
+    return max_value;
 }
